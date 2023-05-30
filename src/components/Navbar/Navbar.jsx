@@ -6,6 +6,8 @@ import { BiHeart, BiSearch } from "react-icons/bi";
 import iconCart from "../../assets/Navbar/icon-cart.svg";
 import useToggle from "../../hooks/useToggle/useToggle";
 import { HiOutlineX, HiOutlineMenu } from "react-icons/hi";
+import Types from "./Types";
+import SubCategory from "./SubCategory";
 const Navbar = () => {
   const { isToggle, toggle } = useToggle(false);
   const sections = [
@@ -14,9 +16,9 @@ const Navbar = () => {
       title: "HOMBRE",
       path: "/Hombre",
       subsections: [
-        { tittlesubsections: "CALZADO", path: "/Calzado" },
-        { tittlesubsections: "INDUMENTARIA", path: "/Indumentaria" },
-        { tittlesubsections: "ACCESORIOS", path: "/Accesorios" }
+        { tittlesubsections: "CALZADOH", path: "/Calzado", id: 1 },
+        { tittlesubsections: "INDUMENTARIAH", path: "/Indumentaria",  id: 2  },
+        { tittlesubsections: "ACCESORIOSH", path: "/Accesorios",  id: 3 }
       ]
     },
     {
@@ -24,9 +26,9 @@ const Navbar = () => {
       title: "MUJER",
       path: "/Mujer",
       subsections: [
-        { tittlesubsections: "CALZADO", path: "/Calzado" },
-        { tittlesubsections: "INDUMENTARIA", path: "/Indumentaria" },
-        { tittlesubsections: "ACCESORIOS", path: "/Accesorios" }
+        { tittlesubsections: "CALZADOM", path: "/Calzado", id: 4 },
+        { tittlesubsections: "INDUMENTARIAM", path: "/Indumentaria", id: 5 },
+        { tittlesubsections: "ACCESORIOSM", path: "/Accesorios", id: 6 }
       ]
     },
     {
@@ -34,9 +36,9 @@ const Navbar = () => {
       title: "NIÑOS",
       path: "/Ninos",
       subsections: [
-        { tittlesubsections: "CALZADO", path: "/Calzado" },
-        { tittlesubsections: "INDUMENTARIA", path: "/Indumentaria" },
-        { tittlesubsections: "ACCESORIOS", path: "/Accesorios" }
+        { tittlesubsections: "CALZADON", path: "/Calzado", id: 7 },
+        { tittlesubsections: "INDUMENTARIAN", path: "/Indumentaria", id: 8 },
+        { tittlesubsections: "ACCESORIOSN", path: "/Accesorios", id: 9  }
       ]
     }
   ];
@@ -82,24 +84,15 @@ const Navbar = () => {
       <nav className="w-full max-w-[1500px] p-5 flex md:justify-between justify-center relative gap-2 items-center flex-wrap md:flex-nowrap  h-[40%]">
         <ul className="flex gap-3 md:gap-11 ">
           {sections.map(section => {
-            return (
-              <>
-                <li key={section.id}>
-                  <NavLink to={section.path}>{section.title}</NavLink>
-                </li>
+            return (            
+              <div key={section.id}>
+                  <Types section={section} />
+                  
+              </div>
 
-                {/* <ul className="absolute w-full bottom-[-74px] flex gap-20 left-0  bg-slate-400 p-5 ">
-                  {section.subsections.map(subsection => {
-                    return (
-                      <>
-                        <li key={subsection.title}>
-                          <NavLink to={section.path + subsection.path}>{subsection.title}</NavLink>
-                        </li>
-                      </>
-                    );
-                  })}
-                </ul> */}
-              </>
+
+
+              
             );
           })}
         </ul>
