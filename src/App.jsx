@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Payment from "./pages/Payment";
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/Payment" element={<Payment />} />
         <Route path="*" element={<h1>No found</h1>} />
       </Routes>
+      <Footer />
     </>
   );
 }

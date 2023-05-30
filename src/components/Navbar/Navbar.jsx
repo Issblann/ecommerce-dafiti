@@ -41,7 +41,7 @@ const Navbar = () => {
     }
   ];
   return (
-    <header className="w-full z-10  bg-slate-600 h-[200px] flex flex-col items-center py-[10px] ">
+    <header className="w-full z-10   h-[200px] flex flex-col items-center py-[10px] ">
       <div className="w-full max-w-7xl flex  justify-end h-[60%] p-3">
         <div className="w-full md:w-[60%] flex justify-between items-center">
           <img width="40%" className="p-3" height="83px" src={Logo} alt="Logo" />
@@ -54,7 +54,7 @@ const Navbar = () => {
           </div>
           <div className="flex gap-7 ">
             <ul
-              className={`md:flex md:flex-row md:items-center z-30 md:bg-slate-600 bg-slate-400 h-screen md:h-auto absolute md:static gap-10 flex items-center justify-center  py-4  text-textsmall flex-col font-SourceSansPr  md:mt-0 w-full md:w-auto right-0 transition-all duration-400 ease-in-out ${
+              className={`md:flex md:flex-row md:items-center z-30 md:bg-transparent bg-slate-400 h-screen md:h-auto absolute md:static gap-10 flex items-center justify-center  py-4  text-textsmall flex-col font-SourceSansPr  md:mt-0 w-full md:w-auto right-0 transition-all duration-400 ease-in-out ${
                 isToggle ? "left-0 top-[0]" : "right-full top-[60px]"
               } `}>
               <li>
@@ -79,7 +79,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <nav className="w-full max-w-7xl flex justify-between relative gap-2 items-center h-[40%] p-3">
+      <nav className="w-full max-w-[1500px] p-5 flex md:justify-between justify-center relative gap-2 items-center flex-wrap md:flex-nowrap  h-[40%]">
         <ul className="flex gap-3 md:gap-11 ">
           {sections.map(section => {
             return (
