@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../assets/Navbar/LOGO.svg";
 import { HiOutlineUserCircle } from "react-icons/hi";
@@ -7,41 +7,27 @@ import iconCart from "../../assets/Navbar/icon-cart.svg";
 import useToggle from "../../hooks/useToggle/useToggle";
 import { HiOutlineX, HiOutlineMenu } from "react-icons/hi";
 import Types from "./Types";
+import { sections } from "../../data/sections";
 import SubCategory from "./SubCategory";
 const Navbar = () => {
-  const { isToggle, toggle } = useToggle(false);
-  const sections = [
-    {
-      id: 1,
-      title: "HOMBRE",
-      path: "/Hombre",
-      subsections: [
-        { tittlesubsections: "CALZADOH", path: "/Calzado", id: 1 },
-        { tittlesubsections: "INDUMENTARIAH", path: "/Indumentaria",  id: 2  },
-        { tittlesubsections: "ACCESORIOSH", path: "/Accesorios",  id: 3 }
-      ]
-    },
-    {
-      id: 2,
-      title: "MUJER",
-      path: "/Mujer",
-      subsections: [
-        { tittlesubsections: "CALZADOM", path: "/Calzado", id: 4 },
-        { tittlesubsections: "INDUMENTARIAM", path: "/Indumentaria", id: 5 },
-        { tittlesubsections: "ACCESORIOSM", path: "/Accesorios", id: 6 }
-      ]
-    },
-    {
-      id: 3,
-      title: "NIÑOS",
-      path: "/Ninos",
-      subsections: [
-        { tittlesubsections: "CALZADON", path: "/Calzado", id: 7 },
-        { tittlesubsections: "INDUMENTARIAN", path: "/Indumentaria", id: 8 },
-        { tittlesubsections: "ACCESORIOSN", path: "/Accesorios", id: 9  }
-      ]
-    }
-  ];
+  const { isToggle, toggle, setIsToggle } = useToggle(false);
+  const [typess, setTypess] = useState([])
+
+  const handleFilter = type => {
+    
+    const sec = sections.filter(section => section.title === type);
+    setTypess(sec[0].subsections);
+    setIsToggle(true) 
+    
+  };
+
+  const handleHide = () => {
+    setTimeout(()=> {
+      setIsToggle(false)
+    }, 2000)
+    
+  }
+
   return (
     <header className="w-full z-10   h-[200px] flex flex-col items-center py-[10px] ">
       <div className="w-full max-w-7xl flex  justify-end h-[60%] p-3">
@@ -84,15 +70,10 @@ const Navbar = () => {
       <nav className="w-full max-w-[1500px] p-5 flex md:justify-between justify-center relative gap-2 items-center flex-wrap md:flex-nowrap  h-[40%]">
         <ul className="flex gap-3 md:gap-11 ">
           {sections.map(section => {
-            return (            
+            return (
               <div key={section.id}>
-                  <Types section={section} />
-                  
+                <Types section={section} handleFilter={handleFilter} handleHide={handleHide} />
               </div>
-
-
-
-              
             );
           })}
         </ul>
@@ -110,6 +91,10 @@ const Navbar = () => {
           </form>
         </div>
       </nav>
+      {
+        isToggle && <SubCategory typess={typess} />
+      }
+      
     </header>
   );
 };
