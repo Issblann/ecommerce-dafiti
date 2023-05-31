@@ -10,23 +10,23 @@ import Types from "./Types";
 import { sections } from "../../data/sections";
 import SubCategory from "./SubCategory";
 const Navbar = () => {
-  const { isToggle, toggle, setIsToggle } = useToggle(false);
-  const [typess, setTypess] = useState([])
+  const {
+    isToggle: isMenuToggle,
+    toggle: toggleMenu,
+    setIsToggle: setMenuToggle
+  } = useToggle(false);
+  const {
+    isToggle: isSubCategoryToggle,
+    toggle: toggleCategory,
+    setIsToggle: setCategoryToggle
+  } = useToggle(false);
+  const [typess, setTypess] = useState([]);
 
   const handleFilter = type => {
-    
     const sec = sections.filter(section => section.title === type);
     setTypess(sec[0].subsections);
-    setIsToggle(true) 
-    
+    toggleCategory();
   };
-
-  const handleHide = () => {
-    setTimeout(()=> {
-      setIsToggle(false)
-    }, 2000)
-    
-  }
 
   return (
     <header className="w-full z-10   h-[200px] flex flex-col items-center py-[10px] ">
@@ -34,16 +34,16 @@ const Navbar = () => {
         <div className="w-full md:w-[60%] flex justify-between items-center">
           <img width="40%" className="p-3" height="83px" src={Logo} alt="Logo" />
           <div className="absolute right-1 px-3  cursor-pointer md:hidden z-50">
-            {isToggle ? (
-              <HiOutlineX fontSize="35px" onClick={toggle} />
+            {isMenuToggle ? (
+              <HiOutlineX fontSize="35px" onClick={toggleMenu} />
             ) : (
-              <HiOutlineMenu fontSize="35px" onClick={toggle} />
+              <HiOutlineMenu fontSize="35px" onClick={toggleMenu} />
             )}
           </div>
           <div className="flex gap-7 ">
             <ul
               className={`md:flex md:flex-row md:items-center z-30 md:bg-transparent bg-slate-400 h-screen md:h-auto absolute md:static gap-10 flex items-center justify-center  py-4  text-textsmall flex-col font-SourceSansPr  md:mt-0 w-full md:w-auto right-0 transition-all duration-400 ease-in-out ${
-                isToggle ? "left-0 top-[0]" : "right-full top-[60px]"
+                isMenuToggle ? "left-0 top-[0]" : "right-full top-[60px]"
               } `}>
               <li>
                 <Link className="flex gap-2 justify-center items-center w-full">
@@ -67,12 +67,12 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <nav className="w-full max-w-[1500px] p-5 flex md:justify-between justify-center relative gap-2 items-center flex-wrap md:flex-nowrap  h-[40%]">
+      <nav className="w-full max-w-[1500px] p-5 flex md:justify-between relative gap-2 items-center flex-wrap md:flex-nowrap ">
         <ul className="flex gap-3 md:gap-11 ">
           {sections.map(section => {
             return (
               <div key={section.id}>
-                <Types section={section} handleFilter={handleFilter} handleHide={handleHide} />
+                <Types section={section} handleFilter={handleFilter} />
               </div>
             );
           })}
@@ -91,10 +91,7 @@ const Navbar = () => {
           </form>
         </div>
       </nav>
-      {
-        isToggle && <SubCategory typess={typess} />
-      }
-      
+      {isSubCategoryToggle && <SubCategory typess={typess} toggleSubCategory={setCategoryToggle} />}
     </header>
   );
 };

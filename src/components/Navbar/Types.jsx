@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-import useToggle from "../../hooks/useToggle/useToggle";
-import SubCategory from "./SubCategory";
-import { sections } from "../../data/sections";
+import React from "react";
 
-const Types = ({ section, handleFilter, handleHide }) => {
-
+const Types = ({ section, handleFilter }) => {
   return (
     <>
-      <li onClick={() => handleFilter(section.title)} onMouseLeave={handleHide}   className=" cursor-pointer">
+      <li onClick={() => handleFilter(section.title)} className="cursor-pointer">
         <p>{section.title}</p>
       </li>
-      
     </>
   );
 };
